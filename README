@@ -1,0 +1,34 @@
+Os dados foram extraídos do Oracle APEX (Oracle Database) por meio de exportação da tabela ALIMENTOS em formato CSV
+📌 Título
+
+NutriCode IA - Classificação de Alimentos
+
+🎯 Objetivo
+
+Aplicar Inteligência Artificial para classificar alimentos com base em seus valores nutricionais.
+
+🤖 Modelo de IA
+
+Árvore de Decisão (Decision Tree)
+
+📊 Dados
+
+Dados extraídos do Oracle APEX (tabela ALIMENTOS), contendo:
+
+calorias
+proteína
+açúcar
+gordura
+🔄 Fluxo do sistema
+
+(coloca o fluxo que te mandei)
+
+▶️ Como executar
+Bash:
+pip install pandas scikit-learn
+python ia_modelo.py
+
+“Foi necessário realizar tratamento e reclassificação dos dados para garantir 
+coerência com o cenário de uso, especialmente para usuários diabéticos.
+
+"Com o aumento da base de dados, a acurácia caiu inicialmente, o que é esperado, pois o modelo passou a lidar com dados mais variados. Em seguida, trabalhamos no balanceamento das classes para melhorar o desempenho."
