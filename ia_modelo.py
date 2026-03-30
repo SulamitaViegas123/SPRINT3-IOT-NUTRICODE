@@ -4,7 +4,12 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import LabelEncoder
 
 # Carregar dados
-df = pd.read_csv("alimentos.csv")
+df = pd.read_csv("alimentos.csv", encoding="latin-1")
+
+from nutricode_api import carregar_alimentos
+
+alimentos = carregar_alimentos()
+print(alimentos)
 
 # 🔥 NORMALIZA COLUNAS
 df.columns = df.columns.str.upper().str.strip()

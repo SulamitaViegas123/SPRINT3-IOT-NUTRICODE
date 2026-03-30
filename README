@@ -1,34 +1,56 @@
-Os dados foram extraídos do Oracle APEX (Oracle Database) por meio de exportação da tabela ALIMENTOS em formato CSV
-📌 Título
-
-NutriCode IA - Classificação de Alimentos
+📌 NutriCode IA - Classificação Inteligente de Alimentos
 
 🎯 Objetivo
-
-Aplicar Inteligência Artificial para classificar alimentos com base em seus valores nutricionais.
+Aplicar Inteligência Artificial para classificar alimentos com base em seus valores nutricionais, auxiliando usuários na identificação de riscos alimentares e promovendo escolhas mais saudáveis.
 
 🤖 Modelo de IA
 
 Árvore de Decisão (Decision Tree)
+Esse modelo foi escolhido por:
+- Ser simples e eficiente
+- Ter alta interpretabilidade
+- Funcionar bem com dados numéricos
+- Permitir identificar padrões nutricionais de forma clara
 
 📊 Dados
+Os dados foram extraídos do Oracle APEX (Oracle Database) por meio da tabela ALIMENTOS, contendo os seguintes atributos:
+Calorias;
+Proteína;
+Açúcar;
+Gordura;
+Carboidrato.
+A base contém aproximadamente +40 registros, podendo ser expandida conforme necessário.
+Os dados foram exportados em formato CSV e utilizados no processamento em Python.
 
-Dados extraídos do Oracle APEX (tabela ALIMENTOS), contendo:
-
-calorias
-proteína
-açúcar
-gordura
 🔄 Fluxo do sistema
+1.O usuário insere ou consulta dados no Oracle APEX
+2.Os dados são armazenados no Oracle Database
+3.A tabela é exportada em formato CSV
+4.O Python realiza a leitura dos dados
+5.O modelo de IA processa as informações
+6.O sistema retorna a classificação do alimento
 
-(coloca o fluxo que te mandei)
+⚙️ Tecnologias Utilizadas
+Python
+Pandas
+Scikit-learn
+Oracle APEX
+Oracle Database
 
 ▶️ Como executar
 Bash:
 pip install pandas scikit-learn
 python ia_modelo.py
+pip install flask
 
-“Foi necessário realizar tratamento e reclassificação dos dados para garantir 
-coerência com o cenário de uso, especialmente para usuários diabéticos.
+📈 Resultados
+O modelo foi capaz de classificar alimentos em categorias como:
+Saudável
+Moderado
+Alto risco
+Crítico
 
-"Com o aumento da base de dados, a acurácia caiu inicialmente, o que é esperado, pois o modelo passou a lidar com dados mais variados. Em seguida, trabalhamos no balanceamento das classes para melhorar o desempenho."
+Durante os testes:
+A acurácia inicial foi impactada pelo aumento da base de dados
+Após balanceamento das classes, houve melhora no desempenho
+O modelo demonstrou capacidade funcional para classificação nutricional
