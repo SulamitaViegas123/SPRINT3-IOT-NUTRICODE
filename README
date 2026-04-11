@@ -1,99 +1,76 @@
-# 📌 NutriCode IA - Classificação Inteligente de Alimentos
+📌 NutriCode IA - Classificação Inteligente de Alimentos
 
-## 🎯 Objetivo
+🎯 Objetivo
 A IA tem como objetivo recomendar ou classificar alimentos com base em características nutricionais, auxiliando o usuário na tomada de decisão dentro da aplicação.
-
 Inicialmente planejamos integração com Oracle APEX via REST, porém devido a instabilidades, utilizamos CSV como fonte confiável de dados.
 
-## 🤖 Modelo de IA
-
-### Árvore de Decisão (Decision Tree)
-
+🤖 Modelo de IA
+Árvore de Decisão (Decision Tree)
 Esse modelo foi escolhido por:
-- Ser simples e eficiente
-- Ter alta interpretabilidade
-- Funcionar bem com dados numéricos
-- Permitir identificar padrões nutricionais de forma clara
+Ser simples e eficiente
+Ter alta interpretabilidade
+Funcionar bem com dados numéricos
+Permitir identificar padrões nutricionais de forma clara
 
-## 📊 Dados
-
+📊 Dados
 Os dados foram extraídos pelo SQL commands no Oracle APEX por meio da tabela ALIMENTOS, contendo os seguintes atributos:
-
-- ID  
-- Calorias  
-- Proteína  
-- Açúcar  
-- Gordura  
-- Carboidrato  
+ID
+Calorias
+Proteína
+Açúcar
+Gordura
+Carboidrato
 
 A base contém aproximadamente +40 registros, podendo ser expandida conforme necessário.
-
 Os dados foram exportados em formato CSV e utilizados no processamento em Python.
 
-## 🔄 Fluxo do sistema
+🔄 Fluxo do sistema
+O usuário envia dados via API
+A API recebe os dados em JSON
+O Python carrega o modelo treinado
+O modelo analisa os dados nutricionais
+A API retorna a classificação do alimento
 
-1. O usuário envia dados via API  
-2. A API recebe os dados em JSON  
-3. O Python carrega o modelo treinado  
-4. O modelo analisa os dados nutricionais  
-5. A API retorna a classificação do alimento  
+Obs: Devido a manutenção do ORDS pela APEX, no momento, desconsidere o arquivo APEX_api.py
 
-Obs: Devido a manutenção do ORDS pela APEX, no momento, desconsidere o arquivo APEX_api.py 
+⚙️ Tecnologias Utilizadas
+Python
+Pandas
+Scikit-learn
+Oracle APEX
+Arquivo CSV
 
-## ⚙️ Tecnologias Utilizadas
-
-- Python  
-- Pandas  
-- Scikit-learn  
-- Oracle APEX  
-- Arquivo CSV  
-
-## ▶️ Como executar
-
-### 1. Instalar dependências:
-
-```bash
+▶️ Como executar
+1. Instalar dependências:
 pip install flask
 pip install oracledb
 pip install pandas scikit-learn flask oracledb
-```
 
-### 2. Executar a API:
-
-```bash
+2. Executar a API:
 py CSV_api.py
-```
 
-### 3. Acessar a API:
-
+3. Acessar a API:
 http://127.0.0.1:5000
 
-### 4. Testar previsão (Postman):
-
+4. Testar previsão (Postman):
 POST: http://127.0.0.1:5000/prever
 
 Em Body -> raw -> JSON:
-
-```json
 {
-  "calorias": 200,
-  "proteina": 10,
-  "acucar": 5,
-  "gordura": 8,
-  "carboidrato": 20
+"calorias": 200,
+"proteina": 10,
+"acucar": 5,
+"gordura": 8,
+"carboidrato": 20
 }
-```
 
-## 📈 Resultados
-
+📈 Resultados
 O modelo foi capaz de classificar alimentos em categorias como:
-- Saudável  
-- Moderado  
-- Alto risco  
-- Crítico  
+Saudável
+Moderado
+Alto risco
+Crítico
 
 Durante os testes:
-
 A acurácia inicial foi impactada pelo aumento da base de dados e após balanceamento das classes, houve melhora no desempenho.
-
 O modelo demonstrou capacidade funcional para classificação nutricional.
