@@ -56,17 +56,25 @@ Obs: Devido a manutenção do ORDS pela APEX, no momento, desconsidere o arquivo
 pip install flask
 pip install oracledb
 pip install pandas scikit-learn flask oracledb
+```
 
-2. Executar a API:
+### 2. Executar a API:
+
+```bash
 py CSV_api.py
+```
 
-3. Acessar a API:
+### 3. Acessar a API:
+
 http://127.0.0.1:5000
 
-4. Testar previsão (Postman):
+### 4. Testar previsão (Postman):
+
 POST: http://127.0.0.1:5000/prever
 
 Em Body -> raw -> JSON:
+
+```json
 {
   "calorias": 200,
   "proteina": 10,
@@ -74,14 +82,18 @@ Em Body -> raw -> JSON:
   "gordura": 8,
   "carboidrato": 20
 }
+```
 
-📈 Resultados
+## 📈 Resultados
+
 O modelo foi capaz de classificar alimentos em categorias como:
-Saudável
-Moderado
-Alto risco
-Crítico
+- Saudável  
+- Moderado  
+- Alto risco  
+- Crítico  
 
 Durante os testes:
-A acurácia inicial foi impactada pelo aumento da base de dados e após balanceamento das classes, houve melhora no desempenho
+
+A acurácia inicial foi impactada pelo aumento da base de dados e após balanceamento das classes, houve melhora no desempenho.
+
 O modelo demonstrou capacidade funcional para classificação nutricional.
