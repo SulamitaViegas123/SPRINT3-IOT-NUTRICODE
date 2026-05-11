@@ -12,7 +12,10 @@ A solução auxilia usuários na tomada de decisão alimentar através da análi
 - Gordura
 - Carboidratos
 
-Inicialmente, o projeto foi planejado para integração completa via Oracle APEX utilizando ORDS/REST. Porém, devido a instabilidades temporárias do serviço ORDS durante o desenvolvimento da sprint, foi utilizada uma abordagem híbrida com arquivo CSV como fonte confiável de dados para treinamento do modelo.
+Inicialmente, o projeto foi planejado para utilizar o Oracle APEX com ORDS/RESTful Services como principal forma de integração. Porém, durante o desenvolvimento da sprint, o serviço ORDS apresentou instabilidades e períodos de manutenção, o que poderia comprometer os testes e a demonstração funcional.
+Por esse motivo, mantivemos o arquivo `alimentos.csv` dentro do projeto como fonte de dados de apoio para o treinamento do modelo de IA. Esse CSV foi exportado a partir da tabela `ALIMENTOS` no Oracle APEX, garantindo que a base usada no Python fosse compatível com os dados cadastrados na aplicação.
+Para permitir que o Oracle APEX consumisse a Inteligência Artificial de forma estável, a API Flask foi hospedada no Render. Assim, o APEX envia os dados nutricionais para a API online, a IA processa as informações e retorna a classificação do alimento em tempo real.
+Dessa forma, mesmo com a instabilidade do ORDS, a integração entre Oracle APEX e IA permanece funcional através da API hospedada em nuvem.
 
 ---
 
