@@ -5,13 +5,9 @@ from sklearn.preprocessing import LabelEncoder
 
 app = Flask(__name__)
 
-# Carrega os dados locais exportados/preparados
 df = pd.read_csv("alimentos.csv", encoding="latin-1")
-
-# Preenche valores vazios com 0
 df = df.fillna(0)
 
-# Colunas usadas pela IA
 colunas_entrada = [
     "CALORIAS",
     "PROTEINA",
@@ -20,7 +16,6 @@ colunas_entrada = [
     "CARBOIDRATO"
 ]
 
-# Resultado que a IA aprende a prever
 coluna_saida = "CLASSIFICACAO"
 
 X = df[colunas_entrada]
@@ -37,12 +32,25 @@ modelo = DecisionTreeClassifier(
 modelo.fit(X, y_encoded)
 
 
+def traduzir_classificacao(classificacao):
+    mapa = {
+        "MUITO_SAUDAVEL": "Excelente",
+        "SAUDAVEL": "Bom",
+        "MODERADO": "Moderado",
+        "ALTO_RISCO": "Alto Risco",
+        "CRITICO": "Crítico"
+    }
+
+    return mapa.get(classificacao, classificacao)
+
+
 @app.route("/", methods=["GET"])
 def home():
     return jsonify({
         "mensagem": "API NutriCode IA funcionando",
         "modelo": "Decision Tree Classifier",
-        "status": "online"
+        "status": "online",
+        "descricao": "API responsável por classificar alimentos com Inteligência Artificial e retornar o resultado para o Oracle APEX."
     })
 
 
@@ -59,10 +67,12 @@ def prever():
     ]]
 
     resultado = modelo.predict(entrada)
-    classificacao = encoder.inverse_transform(resultado)[0]
+    classificacao_original = encoder.inverse_transform(resultado)[0]
+    classificacao_formatada = traduzir_classificacao(classificacao_original)
 
     return jsonify({
-        "classificacao": classificacao,
+        "classificacao": classificacao_formatada,
+        "classificacao_original": classificacao_original,
         "entrada": dados
     })
 
