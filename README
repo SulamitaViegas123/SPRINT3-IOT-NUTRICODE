@@ -1,76 +1,176 @@
-📌 NutriCode IA - Classificação Inteligente de Alimentos
+# 🥗 NutriCode IA - Classificação Inteligente de Alimentos
 
-🎯 Objetivo
-A IA tem como objetivo recomendar ou classificar alimentos com base em características nutricionais, auxiliando o usuário na tomada de decisão dentro da aplicação.
-Inicialmente planejamos integração com Oracle APEX via REST, porém devido a instabilidades, utilizamos CSV como fonte confiável de dados.
+## 📌 Objetivo
 
-🤖 Modelo de IA
-Árvore de Decisão (Decision Tree)
-Esse modelo foi escolhido por:
-Ser simples e eficiente
-Ter alta interpretabilidade
-Funcionar bem com dados numéricos
-Permitir identificar padrões nutricionais de forma clara
+O projeto NutriCode IA tem como objetivo analisar alimentos com base em seus dados nutricionais e gerar classificações inteligentes utilizando Inteligência Artificial.
 
-📊 Dados
-Os dados foram extraídos pelo SQL commands no Oracle APEX por meio da tabela ALIMENTOS, contendo os seguintes atributos:
-ID
-Calorias
-Proteína
-Açúcar
-Gordura
-Carboidrato
+A solução auxilia usuários na tomada de decisão alimentar através da análise de:
 
-A base contém aproximadamente +40 registros, podendo ser expandida conforme necessário.
-Os dados foram exportados em formato CSV e utilizados no processamento em Python.
+- Calorias
+- Proteínas
+- Açúcar
+- Gordura
+- Carboidratos
 
-🔄 Fluxo do sistema
-O usuário envia dados via API
-A API recebe os dados em JSON
-O Python carrega o modelo treinado
-O modelo analisa os dados nutricionais
-A API retorna a classificação do alimento
+Inicialmente, o projeto foi planejado para integração completa via Oracle APEX utilizando ORDS/REST. Porém, devido a instabilidades temporárias do serviço ORDS durante o desenvolvimento da sprint, foi utilizada uma abordagem híbrida com arquivo CSV como fonte confiável de dados para treinamento do modelo.
 
-Obs: Devido a manutenção do ORDS pela APEX, no momento, desconsidere o arquivo APEX_api.py
+---
 
-⚙️ Tecnologias Utilizadas
-Python
-Pandas
-Scikit-learn
-Oracle APEX
-Arquivo CSV
+# 🤖 Modelo de Inteligência Artificial
 
-▶️ Como executar
-1. Instalar dependências:
-pip install flask
-pip install oracledb
-pip install pandas scikit-learn flask oracledb
+O modelo utilizado foi:
 
-2. Executar a API:
-py CSV_api.py
+## Decision Tree Classifier (Árvore de Decisão)
 
-3. Acessar a API:
+A escolha foi feita devido às seguintes vantagens:
+
+- Alta interpretabilidade
+- Fácil implementação
+- Boa performance com dados numéricos
+- Capacidade de identificar padrões nutricionais
+- Baixo custo computacional
+
+O modelo foi desenvolvido em Python utilizando a biblioteca Scikit-learn.
+
+---
+
+# 📊 Base de Dados
+
+Os dados foram extraídos da tabela `ALIMENTOS` no Oracle APEX através do SQL Commands.
+
+A base contém atributos como:
+
+- ID
+- Nome
+- Calorias
+- Proteína
+- Açúcar
+- Gordura
+- Carboidrato
+- Classificação
+
+Os dados foram exportados para CSV e utilizados no treinamento do modelo.
+
+Atualmente a base possui mais de 40 registros alimentares, podendo ser expandida futuramente.
+
+---
+
+# 🔄 Fluxo da Solução
+
+O funcionamento da aplicação ocorre da seguinte forma:
+
+1. O usuário preenche os dados nutricionais no Oracle APEX
+2. O Oracle APEX envia os dados via REST API
+3. A API Flask recebe os dados em formato JSON
+4. O modelo treinado processa as informações
+5. A IA retorna a classificação nutricional
+6. O Oracle APEX exibe o resultado ao usuário
+
+---
+
+# ☁️ Hospedagem da API
+
+A API foi hospedada em nuvem utilizando a plataforma Render.
+
+## Endpoint principal
+
+```txt
+https://nutricode-ia-api.onrender.com
+```
+
+Esse endpoint responde via método GET e demonstra que a API está online.
+
+## Endpoint de previsão
+
+```txt
+https://nutricode-ia-api.onrender.com/prever
+```
+
+Esse endpoint utiliza o método POST, sendo responsável pelas previsões da IA.
+
+---
+
+# ⚙️ Tecnologias Utilizadas
+Python, Flask, Pandas, Scikit-learn, Oracle APEX, Oracle SQL, REST API, Render Cloud e CSV.
+
+---
+
+# 📁 Estrutura dos Arquivos
+
+| Arquivo | Função |
+|---|---|
+| `app.py` | API principal Flask |
+| `alimentos.csv` | Base de dados utilizada |
+| `requirements.txt` | Dependências do projeto |
+| `modelo.py` | Treinamento/testes auxiliares da IA |
+| `CSV_api.py` | Versão alternativa da API utilizando CSV |
+| `APEX_api.py` | Integração experimental via Oracle APEX |
+
+> Obs: devido às instabilidades temporárias do ORDS/APEX durante a sprint, o arquivo `APEX_api.py` não está sendo utilizado atualmente.
+
+---
+
+# ▶️ Como Executar Localmente
+
+## 1. Instalar dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+Ou manualmente:
+
+```bash
+pip install flask pandas scikit-learn oracledb
+```
+
+## 2. Executar a aplicação
+
+```bash
+py app.py
+```
+
+## 3. Acessar a API
+
+```txt
 http://127.0.0.1:5000
+```
 
-4. Testar previsão (Postman):
-POST: http://127.0.0.1:5000/prever
+# 🧪 Testando a IA
 
-Em Body -> raw -> JSON:
+## Endpoint de previsão
+
+```txt
+POST /prever
+```
+
+## Exemplo JSON
+
+```json
 {
-"calorias": 200,
-"proteina": 10,
-"acucar": 5,
-"gordura": 8,
-"carboidrato": 20
+  "calorias": 200,
+  "proteina": 10,
+  "acucar": 5,
+  "gordura": 8,
+  "carboidrato": 20
 }
+```
 
-📈 Resultados
-O modelo foi capaz de classificar alimentos em categorias como:
-Saudável
-Moderado
-Alto risco
-Crítico
+# 📈 Classificações da IA
 
-Durante os testes:
-A acurácia inicial foi impactada pelo aumento da base de dados e após balanceamento das classes, houve melhora no desempenho.
-O modelo demonstrou capacidade funcional para classificação nutricional.
+## O modelo foi treinado para retornar classificações como:
+Excelente, Bom, Moderado, Alto Risco e Crítico.
+
+# ✅ Resultados Obtidos
+## Durante os testes realizados:
+- A API foi integrada com sucesso ao Oracle APEX
+- O modelo conseguiu classificar alimentos nutricionalmente
+- A aplicação respondeu corretamente via REST API
+- O deploy em nuvem via Render funcionou corretamente
+- O sistema apresentou comportamento consistente durante os testes
+Mesmo sendo um protótipo acadêmico, a solução demonstrou potencial de expansão para aplicações reais na área nutricional e alimentícia.
+
+# 👨‍💻 Integrantes
+- RM560914 – Lucas Almeida de Siqueira
+- RM561090 – Matteus Viegas dos Santos
+- RM561089 – Sulamita Viegas dos Santos
