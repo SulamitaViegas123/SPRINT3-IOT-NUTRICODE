@@ -168,9 +168,7 @@ Excelente, Bom, Moderado, Alto Risco e Crítico.
 - A API foi integrada com sucesso ao Oracle APEX
 - O modelo conseguiu classificar alimentos nutricionalmente
 - A aplicação respondeu corretamente via REST API
-- O deploy em nuvem via Render funcionou corretamente
-- O sistema apresentou comportamento consistente durante os testes
-Mesmo sendo um protótipo acadêmico, a solução demonstrou potencial de expansão para aplicações reais na área nutricional e alimentícia.
+- O deploy em nuvem via Render funcionou corretamente.
 
 # 👨‍💻 Integrantes
 - RM560914 – Lucas Almeida de Siqueira
